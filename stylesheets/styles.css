@@ -1,0 +1,36 @@
+.container {
+    margin: 10px;
+}
+
+.grid-row {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 800px;
+}
+
+.grid-row > span{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid gray;
+    width: 60px;
+    height: 60px;
+    margin: 3px;
+}
+
+.grid-row > span > div {
+    height: 60px;
+    font-size: 9px;
+    padding-top: 4px;
+    padding-left: 4px;
+
+}
+.grid-row > span > div > img {
+    height: 40px;
+    width: 40px;
+}
+
+#playerHP {
+    text-align: center;
+}
