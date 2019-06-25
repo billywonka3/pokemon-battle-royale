@@ -1,6 +1,12 @@
 .container {
-    margin: 10px;
+    margin-left: 10px;
+    margin-right: 30px;
+    margin-top: 15px;
 }
+/* 
+.grid-box {
+
+} */
 
 .grid-row {
     display: flex;
@@ -22,15 +28,25 @@
 .grid-row > span > div {
     height: 60px;
     font-size: 9px;
+    text-align: center;
     padding-top: 4px;
     padding-left: 4px;
 
 }
-.grid-row > span > div > img {
+div > img {
     height: 40px;
     width: 40px;
 }
 
+.clickable {
+    font-size: 9px;
+    text-align: center;
+}
+
 #playerHP {
     text-align: center;
+}
+
+#score {
+    margin: 0 50px 10px 50px;
 }
