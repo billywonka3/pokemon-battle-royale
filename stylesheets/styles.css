@@ -4,6 +4,25 @@
     margin-top: 15px;
 }
 
+#playerHP {
+    text-align: center;
+}
+
+progress {
+    width: 22%;
+
+}
+
+#score {
+    width: 22%;
+    margin-left: 20px;
+}
+
+.clickable {
+    font-size: 9px;
+    text-align: center;
+}
+
 .grid-box {
 
 }
@@ -36,23 +55,4 @@
 div > img {
     height: 40px;
     width: 40px;
-}
-
-.clickable {
-    font-size: 9px;
-    text-align: center;
-}
-
-#playerHP {
-    text-align: center;
-}
-
-progress {
-    width: 26%;
-    margin: 0 15px 10px 0;
-}
-
-#score {
-    width: 26%;
-    margin-right: 0px;
 }

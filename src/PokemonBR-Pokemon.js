@@ -68,74 +68,82 @@
     //   <div class="npc"><img src="img/snorunt3.gif"/><p>Ice</p></div>,
     //   <div class="npc"><img src="img/axew3.gif"/><p>Dragon</p></div>];
 
-    let coordinateArray = ["r1c1", "r1c2", "r1c3", "r1c4", "r1c5", "r1c6", "r1c7", "r1c8", "r1c9", "r1c10", "r1c11", "r1c12", 
-                          "r2c12", "r3c12", "r4c12", "r5c12", "r6c12", "r7c12", "r8c12", "r9c12", "r10c12", "r11c12", "r12c12",
-                          "r12c1", "r12c2", "r12c3", "r12c4", "r12c5", "r12c6", "r12c7", "r12c8", "r12c9", "r12c10", "r12c11",
-                          "r2c1", "r3c1", "r4c1", "r5c1", "r6c1", "r7c1", "r8c1", "r9c1", "r10c1", "r11c1"];
+    let coordinateArray = ["r11c11", "r11c12", "r11c13", "r11c14", "r11c15", "r11c16", "r11c17", "r11c18", "r11c19", "r11c20", "r11c21", "r11c22", 
+                          "r12c22", "r13c22", "r14c22", "r15c22", "r16c22", "r17c22", "r18c22", "r19c22", "r20c22", "r21c22", "r22c22",
+                          "r22c11", "r22c12", "r22c13", "r22c14", "r22c15", "r22c16", "r22c17", "r22c18", "r22c19", "r22c20", "r22c21",
+                          "r12c11", "r13c11", "r14c11", "r15c11", "r16c11", "r17c11", "r18c11", "r19c11", "r20c11", "r21c11"];
 
-
-                          let b = ["r1c1", "r1c2", "r1c3", "r1c4", "r1c5", "r1c6", "r1c7", "r1c8", "r1c9", "r1c10", "r1c11", "r1c12", ]
-    
   // Random Number Generators
     // let randomFour = Math.floor(Math.random()*4);
     // let randomTwelve = Math.floor(Math.random()*12);
     let randomTwentyone = Math.floor(Math.random()*21);
-    let randomFortyfour = Math.floor(Math.random()*12);
+    let randomFortyfour = Math.floor(Math.random()*44);
     // let randomSixtyseven = Math.floor(Math.random()*72);
 
   // Random Spawning along grid edges
-    let randomEdge = b[randomFortyfour];
-    // console.log(randomEdge);
+    let randomEdge = coordinateArray[randomFortyfour];
+    console.log(randomEdge);
     let pokeCPU1 = pokemonArray1[randomTwentyone];
-    // console.log(pokeCPU1);
+    console.log(pokeCPU1);
     let spawnRate = $(`.${randomEdge}`).append(`${pokeCPU1}`);
 
-    // setInterval(() => {
+    if (randomEdge == "r11c12" || "r11c13" || "r11c14" || "r11c15" || "r11c16" || "r11c17" || "r11c18" || "r11c19" || "r11c20" || "r11c21") {
+      moveDown(pokeCPU1, randomEdge); // moving down from row 11
+    } else if (randomEdge == "r12c22" || "r13c22" || "r14c22" || "r15c22" || "r16c22" || "r17c22" || "r18c22" || "r19c22"|| "r20c22" || "r21c22") {
+      moveLeft (pokeCPU1, randomEdge); // moving left from column 22
+    } else if (randomEdge == "r22c12" || "r22c13" || "r22c14" || "r22c15" || "r22c16" || "r22c17" || "r22c18" || "r22c19" || "r22c20" || "r22c21") {
+      moveUp (pokeCPU1, randomEdge); // moving up from row 22
+    } else if (randomEdge == "r02c11" || "r13c11" || "r14c11" || "r15c11" || "r16c11" || "r17c11" || "r18c11" || "r19c11" || "r20c11" || "r21c11") {
+      moveRight (pokeCPU1, randomEdge); // moving right from column 11
 
+    // } else if (randomEdge == "r11c11" || "r11c12") {
+    //   moveDiaDR(pokeCPU1, randomEdge);  // moving diagonal from top-left corners
+    // }
+    // } else if (randomEdge == "r11c22" || "r11c21") {
+    //   moveDiaDL(pokeCPU1, randomEdge);  // moving diagonal from top-right corners
+    // }
+    // } else if (randomEdge == "r22c22" || "r22c21") {
+    //   moveDiaUL(pokeCPU1, randomEdge);  // moving diagonal from bottom-left corners
+    // }
+    // } else if (randomEdge == "r22c11" || "r21c12") {
+    //   moveDiaUR(pokeCPU1, randomEdge);  // moving diagonal from bottom-right corners
+    // }
 
-      moveDown(pokeCPU1, randomEdge);
-
-    // },500) 
-
-
-
-
+    // } else if (randomEdge == "r12c11") {
+    //   moveCornerKnightDR (pokeCPU1, randomEdge);  // moving in knight pattern (2R-1D) from top-left corners
+    // }
+    // } else if (randomEdge == "r12c22") {
+    //   moveCornerKnightDL(pokeCPU1, randomEdge);  // moving in knight pattern (1L-2D) from top-right corners
+    // }
+    // } else if (randomEdge == "r21c11") {
+    //   moveCornerKnightUL(pokeCPU1, randomEdge);  // moving in knight pattern (1R-2U) from bottom-left corners
+    // }
+    // } else if (randomEdge == "r21c22") {
+    //   moveCornerKnightUR(pokeCPU1, randomEdge);  // moving in knight pattern (2L-1U) from bottom-right corners
+    // }
+    
     return spawnRate;
-  };
-
+   };
+  }
 
 //-----------------------------------------------------
 
 // NPC Movement Styles
-function moveUp (who) {
-  var y = 12;
-  if (y > 1) {y--;} ;
-  $(`.r${y}c12`).append(who)
-};
-
 function moveDown (who, where) {
-  let x = where[3];
-  let y = where[1];
- 
+  let x = Number(where.substring(1, 3));
+  let y = Number(where.substring(4, 6));
+  console.log('down', x, y)
 
-  console.log(x, y, '=-=-=--=-=-=-=-=-=-=-')
+  $(`.r${x}c${y}`).empty()
 
+  x++;
+  console.log('down', x, y)
 
-  // var y = 1;
-  // if (y < 1) {y++;} ;
-  $(`.r${y}c${x}`).empty()
-
-
-  y++;
-// 
-  
-
-  $(`.r${y}c${x}`).append(who)
+  $(`.r${x}c${y}`).append(who)
 
   setTimeout(()=> {
 
-    let newPlace = `r${y}c${x}`
-
+    let newPlace = `r${x}c${y}`
 
     moveDown(who, newPlace)
 
@@ -143,29 +151,72 @@ function moveDown (who, where) {
 };
 
 function moveLeft () {
-  var x = 12;
-  if (x > 1) {x--;} ;
-  $(`.r12c${y}`).append(npc)
+  let x = Number(where.substring(1, 3));
+  let y = Number(where.substring(4, 6));
+  console.log('left', x, y)
+
+  $(`.r${x}c${y}`).empty()
+
+  y--;
+  console.log('left', x, y)
+
+  $(`.r${x}c${y}`).append(who)
+
+  setTimeout(()=> {
+
+    let newPlace = `r${x}c${y}`
+
+    moveLeft(who, newPlace)
+
+  }, 1000)
+};
+
+function moveUp (who) {
+  let x = Number(where.substring(1, 3));
+  let y = Number(where.substring(4, 6));
+  console.log('up', x, y)
+
+  $(`.r${x}c${y}`).empty()
+
+  x--;
+  console.log('up', x, y)
+  
+  $(`.r${x}c${y}`).append(who)
+
+  setTimeout(()=> {
+
+    let newPlace = `r${x}c${y}`
+
+    moveUp(who, newPlace)
+
+  }, 1000)
 };
 
 function moveRight () {
-  var x = 1;
-  if (x < 12) {x++;} ;
-  $(`.r1c${y}`).append(npc)
+  let x = Number(where.substring(1, 3));
+  let y = Number(where.substring(4, 6));
+  console.log('right', x, y)
+
+  $(`.r${x}c${y}`).empty()
+  
+  y++;
+  console.log('right', x, y)
+
+  $(`.r${x}c${y}`).append(who)
+
+  setTimeout(()=> {
+
+    let newPlace = `r${x}c${y}`
+
+    moveRight(who, newPlace)
+
+  }, 1000)
 };
-
-// "ArrowUp": if (y > 1) {y--;} break;
-// "ArrowRight": if (x < 12) {x++;} break;
-// "ArrowDown": if (y < 12) {y++;} break;
-// "ArrowLeft": if (x > 1) {x--;} break;
-
-
-// Spawn Movement Initialization
 
 
 //-----------------------------------------------------
 
-// Pokemon Database
+// Player Pokemon Database
 // var pokemonSet1 = [ // Pure-type Pokemon
 //   {name: "Lillipup", type: "normal", img1: <img src="img/lillipup1.gif"/>}, 
 //   {name: "Tornadus", type: "fly", img1: <img src="img/tornadus1.gif"/>}, 
@@ -185,7 +236,7 @@ function moveRight () {
 //   {name: "Squirtle", type: "water", img1: <img src="img/squirtle1.gif"/>}, 
 //   {name: "Snorunt", type: "ice", img1: <img src="img/snorunt1.gif"/>}, 
 //   {name: "Axew", type: "dragon", img1: <img src="img/axew1.gif"/>}
-// ]
+// ];
 
 // var pokemonSet2 = [ // EVO3 Type-Changers
 //   {name: "Bunnelby", type: "normal", img1: <img src="img/1.gif"/>}, 
@@ -201,4 +252,4 @@ function moveRight () {
 //   {name: "Staryu", type: "water", img1: <img src="img/1.gif"/>}, 
 //   {name: "Alolan Vulpix", type: "ice", img1: <img src="img/1.gif"/>}, 
 //   {name: "Dratini", type: "dragon", img1: <img src="img/1.gif"/>}
-// ]
+// ];

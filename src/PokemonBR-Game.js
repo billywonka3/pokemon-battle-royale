@@ -14,22 +14,22 @@ window.onload = function () {
     // console.log(imgSource);
     $('#player').children().prop('src', imgSource)
     $(".clickable").empty(); // Remove all other sprites
-    setTimeout(npcSpawn, 3000)
+    setInterval(npcSpawn, 3000)
   });
 
   // Player Controls & Movement
-  let x = 1;
-  let y = 1;
+  let a = 11;
+  let b = 11;
 
   document.onkeydown = function(e) {
     switch (e.key) {
-      case "ArrowUp": if (y > 1) {y--;} break;
-      case "ArrowRight": if (x < 12) {x++;} break;
-      case "ArrowDown": if (y < 12) {y++;} break;
-      case "ArrowLeft": if (x > 1) {x--;} break;
+      case "ArrowUp": if (a > 11) {a--;} break;
+      case "ArrowRight": if (b < 22) {b++;} break;
+      case "ArrowDown": if (a < 22) {a++;} break;
+      case "ArrowLeft": if (b > 11) {b--;} break;
     }
-    // console.log(`.r${y}c${x}`)
-    $(`.r${y}c${x}`).append(player);
+    // console.log(`.r${a}c${b}`)
+    $(`.r${a}c${b}`).append(player);
   }
 
   // Collision Function
