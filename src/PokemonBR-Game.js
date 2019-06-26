@@ -10,10 +10,11 @@ window.onload = function () {
 
   $(".clickable").click(function() {
     // this.style.backgroundColor = 'red';
-    let theSource = $(this).children().prop('src');
-    // console.log(theSource);
-    $('#player').children().prop('src', theSource)
-    $(".clickable").empty(); // Remove all other sprites from the board
+    let imgSource = $(this).children().prop('src');
+    // console.log(imgSource);
+    $('#player').children().prop('src', imgSource)
+    $(".clickable").empty(); // Remove all other sprites
+    setTimeout(npcSpawn, 3000)
   });
 
   // Player Controls & Movement
@@ -27,12 +28,13 @@ window.onload = function () {
       case "ArrowDown": if (y < 12) {y++;} break;
       case "ArrowLeft": if (x > 1) {x--;} break;
     }
-    console.log(`.r${y}c${x}`)
+    // console.log(`.r${y}c${x}`)
     $(`.r${y}c${x}`).append(player);
   }
 
   // Collision Function
-  // Collision() {
+  // collision(player) {
+    
   //   playerHP.value -= 8(); // Use for collision base-damage
 
   // };

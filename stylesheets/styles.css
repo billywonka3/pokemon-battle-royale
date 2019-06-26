@@ -3,10 +3,10 @@
     margin-right: 30px;
     margin-top: 15px;
 }
-/* 
+
 .grid-box {
 
-} */
+}
 
 .grid-row {
     display: flex;
@@ -47,6 +47,12 @@ div > img {
     text-align: center;
 }
 
+progress {
+    width: 26%;
+    margin: 0 15px 10px 0;
+}
+
 #score {
-    margin: 0 50px 10px 50px;
+    width: 26%;
+    margin-right: 0px;
 }
