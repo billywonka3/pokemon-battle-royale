@@ -1,15 +1,14 @@
-
 let startGame;
 class Game {
   constructor(){
-    this.enemyArr = [];
     this.player;
+    this.enemyArr = [];
   }
 
-  genPokemon() {
-    let randomPokemon = pokemonSet1[Math.floor(Math.random() * pokemonSet1.length)]
-    this.enemyArr.push(new Pokemon (randPokemon.name, randPokemon.attack, randPokemon.type, randPokemon.img1, Math.floor(Math.random()*12+1), Math.floor(Math.random()*12+1)))
-  }
+  // genPokemon() {
+  //   let randomPokemon = pokemonSet1[Math.floor(Math.random() * pokemonSet1.length)]
+  //   this.enemyArr.push(new Pokemon (randPokemon.name, randPokemon.attack, randPokemon.type, randPokemon.img1, Math.floor(Math.random()*12+1), Math.floor(Math.random()*12+1)))
+  // }
   
   createPlayer(imgId) {    
     // console.log("...................  ", this.enemyArr)
@@ -29,22 +28,61 @@ class Game {
       // let spawnImg = startGame.enemyArr[startGame.enemyArr.length-1].img;
       let spawnType = startGame.enemyArr[startGame.enemyArr.length-1].type;
       let spawnName = startGame.enemyArr[startGame.enemyArr.length-1].name;
-      // console.log(startGame.enemyArr[i].row, startGame.enemyArr[i].column);
-      console.log(spawnLocation)
+
       // console.log(spawnName)
       // console.log(spawnId)
       // console.log(spawnImg)
-      console.log(spawnType)
+      // console.log(spawnType)
+      // console.log(spawnLocation)      
       // console.log('----------')
-      $(''+spawnLocation).append(`<div class="npc"> <img id="${startGame.enemyArr.length-1}" src="img/${spawnName.toLowerCase()}1.gif"/> <p>${spawnType}</p> </div>`);
+      if ($(""+spawnLocation).children().length !== 0) {
+        startGame.enemyArr.pop();
+        startGame.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 11), Math.floor((Math.random() * 12) + 11)))
+        spawnLocation = `.r${startGame.enemyArr[startGame.enemyArr.length-1].row}c${startGame.enemyArr[startGame.enemyArr.length-1].column}`
+      }
+      if ($(""+spawnLocation).children().length !== 0) {
+        startGame.enemyArr.pop();
+        startGame.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 11), Math.floor((Math.random() * 12) + 11)))
+        spawnLocation = `.r${startGame.enemyArr[startGame.enemyArr.length-1].row}c${startGame.enemyArr[startGame.enemyArr.length-1].column}`
+      }
+      if ($(""+spawnLocation).children().length !== 0) {
+        startGame.enemyArr.pop();
+        startGame.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 11), Math.floor((Math.random() * 12) + 11)))
+        spawnLocation = `.r${startGame.enemyArr[startGame.enemyArr.length-1].row}c${startGame.enemyArr[startGame.enemyArr.length-1].column}`
+      }
+      if ($(""+spawnLocation).children().length !== 0) {
+        startGame.enemyArr.pop();
+        startGame.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 11), Math.floor((Math.random() * 12) + 11)))
+        spawnLocation = `.r${startGame.enemyArr[startGame.enemyArr.length-1].row}c${startGame.enemyArr[startGame.enemyArr.length-1].column}`
+      }
+
+      let inner =  $(`<img id="${startGame.enemyArr.length-1}" src="img/${spawnName.toLowerCase()}1.gif"/> <p>${spawnType.toUpperCase()}</p>`)
+      
+      let theDiv = $(`<div class="npc"> </div>`)
+
+      theDiv.append(inner)
+
+      $(''+spawnLocation).append(theDiv);
+
+      let newNumber = (Math.floor((Math.random() * 3 ))); // make a random number btwn 0-3
+      console.log(newNumber);
+        if (newNumber == 0) {
+          moveDown(theDiv, spawnLocation); 
+        } else if (newNumber == 1) {
+          moveLeft(theDiv, spawnLocation);
+        } else if (newNumber == 2) {
+          moveUp(theDiv, spawnLocation);
+        } else if (newNumber == 3) {
+          moveRight(theDiv, spawnLocation);
+        } 
+      }
     }
-  }
+  
 
   randomMovement() {
     for(let i = 0; i < startGame.enemyArr.length; i++) {
       // let num1 = this.enemyArr[i].row;
       // let num2 = this.enemyArr[i].column;
-  
       if (Math.floor( (Math.random()*200) %5 === 0 ) ){
         this.enemyArr[i].row += Math.floor(Math.random()*1);
       } else if ( (Math.floor(Math.random()*200) %5 === 1 ) ){
@@ -59,72 +97,215 @@ class Game {
 }
 
 //-------------------------------------------------------------------------------
-window.onload = function () {
-  startGame = new Game;
-  // Health & Scoreboard
-  let playerHP = document.getElementById("playerHP")
+  window.onload = function () {
+    startGame = new Game;
+    // Health & Scoreboard
+    let playerHP = document.getElementById("playerHP");
+      if (playerHP < 1) {
+        return gameover;
+      }
+    // Instructions Starter Screen
 
-  // Instructions Starter Screen
+    // Starter Pokemon Choice
+    let player = $("#player")
 
-  // Player Controls & Movement
+    $(".clickable").click(function() {
+      // this.style.backgroundColor = 'red';
+      let imgId = $(this).children().prop('id');
+      startGame.createPlayer(imgId)
+      $('#player').empty();
+      $('#player').append($(this).children());
+      $(".clickable").empty(); // Remove all other sprites
+
+      setInterval(startGame.createPokemon, 800)
+    });
+
+    // Player Controls & Movement
+    let a = 11;
+    let b = 11;
+
+    document.onkeydown = function(e) {
+      switch (e.key) {
+        case "ArrowUp": if (a > 11) {a--;} break;
+        case "ArrowRight": if (b < 22) {b++;} break;
+        case "ArrowDown": if (a < 22) {a++;} break;
+        case "ArrowLeft": if (b > 11) {b--;} break;
+      }
+      $(`.r${a}c${b}`).append(player);
+
+      // Collision Conditionals 
+      // let damageMultiplier = {
+      //   Normal : [Fight],
+      //   Flying: [Electric, Ice, Rock],
+      //   Fight: [Fairy, Flying, Psychic],
+      //   Fairy: [Poison, Steel],
+      //   Psychic: [Bug, Dark, Ghost],
+      //   Ghost: [Ghost, Dark],
+      //   Dark: [Bug, Fight, Fairy],
+      //   Poison: [Ground, Psychic],
+      //   Rock: [Fight, Grass, Ground, Steel, Water],
+      //   Ground: [Grass, Ice, Water],
+      //   Steel: [Fire, Fight, Ground],
+      //   Electric: [Ground],
+      //   Bug: [ Fire, Flying, Rock],
+      //   Grass: [Bug, Fire, Flying, Ice, Poison],
+      //   Fire: [Ground, Rock, Water],
+      //   Water: [Electric, Grass],
+      //   Ice: [Fight, Fire, Rock, Steel],
+      //   Dragon: [Dragon, Ice, Fairy]
+      // };
+      // let damageDampener = {
+      //   Normal : [none],
+      //   Flying: [Bug, Fight, Grass],
+      //   Fight: [Bug, Dark, Rock],
+      //   Fairy: [Bug, Dark, Fight],
+      //   Psychic: [Fight, Psychic],
+      //   Ghost: [Bug, Poison],
+      //   Dark: [Dark, Ghost],
+      //   Poison: [Bug, Fairy, Fight, Grass, Poison],
+      //   Rock: [Fire, Flying, Normal, Poison],
+      //   Ground: [Poison, Rock],
+      //   Steel: [Bug, Dragon, Fairy, Flying, Grass, Ice, norma, Psychic, Rock, Steel],
+      //   Electric: [Electric, Flying, Steel],
+      //   Bug: [Fight, Grass, Ground],
+      //   Grass: [Electric, Grass, Ground, Water],
+      //   Fire: [Bug, Fairy, Fire, Grass, Ice, Steel],
+      //   Water: [Fire, Ice, Steel, Water],
+      //   Ice: [Ice],
+      //   Dragon: [Electric, Fire, Grass, Water]
+      // };
+      // let immune = {
+      //   Normal : [Ghost],
+      //   Flying: [Ground],
+      //   Fight: [none],
+      //   Fairy: [Dragon],
+      //   Psychic: [none],
+      //   Ghost: [Normal, Fight],
+      //   Dark: [pyschic],
+      //   Poison: [none],
+      //   Rock: [none],
+      //   Ground: [Electric],
+      //   Steel: [Poison],
+      //   Electric: [none],
+      //   Bug: [none],
+      //   Grass: [none],
+      //   Fire: [none],
+      //   Water: [none],
+      //   Ice: [none],
+      //   Dragon: [none]
+      // };
+
+      if ( $(`.r${a}c${b}`).children().length > 1 ) {
+        let enemyType = ($(`.r${a}c${b}`).children('.npc').find('p').html())
+        let myType = ($(`.r${a}c${b}`).children('#player').find('p').html())
+        console.log(enemyType)
+        console.log(myType)
+        playerHP.value -= 8;
+
+        // if (damageMultiplier[myType].includes(enemyType)) {
+        //   playerHP.value -= 8 * 2;
+        // }
+        // if (damageDampener[myType].includes(enemyType)) {
+        //   playerHP.value -= 8 / 2;
+        // }
+        // if (immune[myType].includes(enemyType)) {
+        //   playerHP.value -= 8 * 0;
+        // }
+        // else {
+        //   playerHP.value -= 8;
+        // }
+      }
+    };
+}
+
+//--------------------------------------------------------
   
-  let a = 11;
-  let b = 11;
-
-  document.onkeydown = function(e) {
-    switch (e.key) {
-      case "ArrowUp": if (a > 11) {a--;} break;
-      case "ArrowRight": if (b < 22) {b++;} break;
-      case "ArrowDown": if (a < 22) {a++;} break;
-      case "ArrowLeft": if (b > 11) {b--;} break;
-  }
-  // console.log(`.r${a}c${b}`)
-  $(`.r${a}c${b}`).append(player);
-};
-
-// ---------------------------------------------------------
-
-// Starter Pokemon Choice
-let player = $("#player")
-$(".clickable").click(function() {
-  // this.style.backgroundColor = 'red';
-  let imgId = $(this).children().prop('id');
-  startGame.createPlayer(imgId)
-  $('#player').empty();
-  $('#player').append($(this).children());
-  $(".clickable").empty(); // Remove all other sprites
-
-  setInterval(startGame.createPokemon, 2000)
-});
-
-// Collision Function
-const dmgArray = [
-  normal =   [1, 1, 1, 1, 1, 0.5, 1, 0, 0.5, 1, 1, 1, 1, 1, 1, 1, 1, 1],
-  fighting = [2, 1, 0.5, 0.5, 1, 2, 0.5, 0, 2, 1, 1, 1, 1, 0.5, 2, 1, 2, 0.5], 
-  flying =   [1, 2, 1, 1, 1, 0.5, 2, 1, 0.5, 1, 1, 2, 0.5, 1, 1, 1, 1, 1], 
-  poison =   [1, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 0, 1, 1, 2, 1, 1, 1, 1, 1, 2], 
-  ground =   [1, 1, 0, 2, 1, 2, 0.5, 1, 2, 2, 1, 0.5, 2, 1, 1, 1, 1, 1], 
-  rock =     [1, 0.5, 2, 1, 0.5, 1, 2, 1, 0.5, 2, 1, 1, 1, 1, 2, 1, 1, 1], 
-  bug =      [1, 0.5, 0.5, 0.5, 1, 1, 1, 0.5, 0.5, 0.5, 1, 2, 1, 2, 1, 1, 2, 0.5], 
-  ghost =    [0, 1, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 1], 
-  steel =    [1, 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5, 0.5, 1, 0.5, 1, 2, 1, 1, 2], 
-  fire =     [1, 1, 1, 1, 1, 0.5, 2, 1, 2, 0.5, 0.5, 2, 1, 1, 2, 0.5, 1, 1], 
-  water =    [1, 1, 1, 1, 2, 2, 1, 1, 1, 2, 0.5, 0.5, 1, 1, 1, 0.5, 1, 1], 
-  grass =    [1, 1, 0.5, 0.5, 2, 2, 0.5, 1, 0.5, 0.5, 2, 0.5, 1, 1, 1, 0.5, 1, 1], 
-  electric = [1, 1, 2, 1, 0, 1, 1, 1, 1, 1, 2, 0.5, 0.5, 1, 1, 0.5, 1, 1], 
-  psychic =  [1, 2, 1, 2, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 0.5, 1, 1, 0, 1], 
-  ice =      [1, 1, 2, 1, 2, 1, 1, 1, 0.5, 0.5, 0.5, 2, 1, 1, 0.5, 2, 1, 1], 
-  dragon =   [1, 1, 1, 1, 1, 1, 1, 1, 0.5, 1, 1, 1, 1, 1, 1, 2, 1, 0],
-  dark =     [1, 0.5, 1, 1, 1, 1, 1, 2, 1, 1, 1, 1, 1, 2, 1, 1, 0.5, 0.5], 
-  fairy =    [1, 2, 1, 0.5, 1, 1, 1, 1, 0.5, 0.5, 1, 1, 1, 1, 1, 2, 2, 1]
-];
-
-// collision(player) {
+  // NPC Movement Styles
+  function moveDown (who, where) {
+    let x = (where.substring(2, 4));
+    let y = (where.substring(5, 7));
+    console.log('down', x, y)
   
-//   playerHP.value -= 8(); // Use for collision base-damage
-
-};
-
+    $(`.r${x}c${y}`).empty()
+  
+    x++;
+    console.log('down', x, y)
+  
+    $(`.r${x}c${y}`).append(who)
+  
+    setTimeout(()=> {
+  
+      let newPlace = `.r${x}c${y}`
+  
+      moveDown(who, newPlace)
+  
+    }, 1000)
+  };
+  
+  function moveLeft (who, where) {
+    let x = (where.substring(2, 4));
+    let y = (where.substring(5, 7));
+    console.log('left', x, y)
+  
+    $(`.r${x}c${y}`).empty()
+  
+    y--;
+    console.log('left', x, y)
+  
+    $(`.r${x}c${y}`).append(who)
+  
+    setTimeout(()=> {
+  
+      let newPlace = `.r${x}c${y}`
+  
+      moveLeft(who, newPlace)
+  
+    }, 1000)
+  };
+  
+  function moveUp (who, where) {
+    let x = (where.substring(2, 4));
+    let y = (where.substring(5, 7));
+    console.log('up', x, y)
+  
+    $(`.r${x}c${y}`).empty()
+  
+    x--;
+    console.log('up', x, y)
+    
+    $(`.r${x}c${y}`).append(who)
+  
+    setTimeout(()=> {
+  
+      let newPlace = `.r${x}c${y}`
+  
+      moveUp(who, newPlace)
+  
+    }, 1000)
+  };
+  
+  function moveRight (who, where) {
+    let x = (where.substring(2, 4));
+    let y = (where.substring(5, 7));
+    console.log('right', x, y)
+  
+    $(`.r${x}c${y}`).empty()
+    
+    y++;
+    console.log('right', x, y)
+  
+    $(`.r${x}c${y}`).append(who)
+  
+    setTimeout(()=> {
+  
+      let newPlace = `.r${x}c${y}`
+  
+      moveRight(who, newPlace)
+  
+    }, 1000)
+  };
+  
+  
 // ------------------------------------------------------------------------
   // Random Number Generators
     // let randomFour = Math.floor(Math.random()*4);
@@ -179,95 +360,3 @@ const dmgArray = [
   // };
 
 
-  //-----------------------------------------------------
-  
-  // NPC Movement Styles
-  // function randomMove (who, where) {
-  
-  // }
-  
-  // function moveDown (who, where) {
-  //   let x = Number(where.substring(1, 3));
-  //   let y = Number(where.substring(4, 6));
-  //   console.log('down', x, y)
-  
-  //   $(`.r${x}c${y}`).empty()
-  
-  //   x++;
-  //   console.log('down', x, y)
-  
-  //   $(`.r${x}c${y}`).append(who)
-  
-  //   setTimeout(()=> {
-  
-  //     let newPlace = `r${x}c${y}`
-  
-  //     moveDown(who, newPlace)
-  
-  //   }, 1000)
-  // };
-  
-  // function moveLeft () {
-  //   let x = Number(where.substring(1, 3));
-  //   let y = Number(where.substring(4, 6));
-  //   console.log('left', x, y)
-  
-  //   $(`.r${x}c${y}`).empty()
-  
-  //   y--;
-  //   console.log('left', x, y)
-  
-  //   $(`.r${x}c${y}`).append(who)
-  
-  //   setTimeout(()=> {
-  
-  //     let newPlace = `r${x}c${y}`
-  
-  //     moveLeft(who, newPlace)
-  
-  //   }, 1000)
-  // };
-  
-  // function moveUp (who) {
-  //   let x = Number(where.substring(1, 3));
-  //   let y = Number(where.substring(4, 6));
-  //   console.log('up', x, y)
-  
-  //   $(`.r${x}c${y}`).empty()
-  
-  //   x--;
-  //   console.log('up', x, y)
-    
-  //   $(`.r${x}c${y}`).append(who)
-  
-  //   setTimeout(()=> {
-  
-  //     let newPlace = `r${x}c${y}`
-  
-  //     moveUp(who, newPlace)
-  
-  //   }, 1000)
-  // };
-  
-  // function moveRight () {
-  //   let x = Number(where.substring(1, 3));
-  //   let y = Number(where.substring(4, 6));
-  //   console.log('right', x, y)
-  
-  //   $(`.r${x}c${y}`).empty()
-    
-  //   y++;
-  //   console.log('right', x, y)
-  
-  //   $(`.r${x}c${y}`).append(who)
-  
-  //   setTimeout(()=> {
-  
-  //     let newPlace = `r${x}c${y}`
-  
-  //     moveRight(who, newPlace)
-  
-  //   }, 1000)
-  // };
-  
-  // 

@@ -50,7 +50,7 @@ var pokemonSet1 = [ // Pure-type Pokemon
 
 // ------------------------------------------------------------------------
 // ------------------------------------------------------------------------
-  function npcSpawn() {
+  // function npcSpawn() {
     // Pokemon Div Database
       // `<div class="npc"><img id="${i}" src="${enemyArr[i].img1}"/><p>${${enemyArr[i].type}}</p></div>`
     let pokemonArray1 = [
@@ -72,7 +72,7 @@ var pokemonSet1 = [ // Pure-type Pokemon
       '<div class="npc"><img id="15" src="img/squirtle1.gif"/><p>Water</p></div>',
       '<div class="npc"><img id="16" src="img/snorunt1.gif"/><p>Ice</p></div>',
       '<div class="npc"><img id="17" src="img/axew1.gif"/><p>Dragon</p></div>'];
-  }
+  
 
     // let pokemonArray2 = [
     //   <div class="npc"><img src="img/buneary2.gif"/><p>Normal</p></div>,
