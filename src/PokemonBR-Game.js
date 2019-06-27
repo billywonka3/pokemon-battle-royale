@@ -19,6 +19,7 @@ var pokemonSet1 = [ // Pure-type Pokemon
   {name: "Axew", type: "dragon", img1: "../img/axew1.gif"}
 ];
 
+let startGame;
 class Game {
   constructor(){
     this.enemyArr = [];
@@ -29,25 +30,42 @@ class Game {
     let randomPokemon = pokemonSet1[Math.floor(Math.random() * pokemonSet1.length)]
     this.enemyArr.push(new Pokemon (randPokemon.name, randPokemon.attack, randPokemon.type, randPokemon.img1, Math.floor(Math.random()*12+1), Math.floor(Math.random()*12+1)))
   }
-
+  
   createPlayer(imgId) {    
+    // console.log("...................  ", this.enemyArr)
     let playerPokemon = pokemonSet1[Number(imgId)];
 
     this.player = new Pokemon(playerPokemon.name, 50, playerPokemon.type, playerPokemon.img1, 1, 1)
-    console.log(playerPokemon);
+    // console.log(playerPokemon);
   }
 
   createPokemon() {
-
+    // console.log(">>>>>>>>>>> ", startGame.enemyArr);
     let randomPokemon = pokemonSet1[Math.floor(Math.random() * pokemonSet1.length)];
-    console.log('p ========================== ', randomPokemon);
-    if (Math.floor(Math.random() * 100) % 5 === 0) {
-      this.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 1), Math.floor((Math.random() * 12) + 1)))
+    // console.log('p ========================== ', randomPokemon);
+    if (Math.floor(Math.random() * 100) % 2 === 0) {
+      startGame.enemyArr.push(new Pokemon(randomPokemon.name, 10, randomPokemon.type, randomPokemon.img1, Math.floor((Math.random() * 12 )+ 11), Math.floor((Math.random() * 12) + 11)))
+      for (let i=0; i < startGame.enemyArr.length; i++) {
+        // console.log(startGame.enemyArr);
+        // console.log(startGame.enemyArr[0].row);
+        // console.log(startGame.enemyArr.Pokemon.column);
+        let spawnLocation = `.r${startGame.enemyArr[i].row}c${startGame.enemyArr[i].column}`
+        let spawnImg = startGame.enemyArr[i].img;
+        let spawnType = startGame.enemyArr[i].type;
+        let spawnName = startGame.enemyArr[i].name;
+        // console.log(startGame.enemyArr[i].row, startGame.enemyArr[i].column);
+        console.log(spawnLocation)
+        console.log(spawnName)
+        // console.log(spawnId)
+        console.log(spawnImg)
+        console.log(spawnType)
+        console.log('----------')
 
-    console.log(this.enemyArr);
-
-    let spawnLocation = $(`.r${this.enemyArr.row}c${this.enemyArr.column}`).append(randomPokemon);
-    console.log(spawnLocation)
+        // $(''+spawnLocation).html('dtrtfcvgybh')
+        $(''+spawnLocation).append(`<div class="npc"> <img id="${i}" src="img/${spawnName.toLowerCase()}1.gif"/> <p>${spawnType}</p> </div>`);
+        // console.log(appender);
+        // debugger
+      }
     }
   }
 
@@ -69,9 +87,9 @@ class Game {
   }
 }
 
-
 //-------------------------------------------------------------------------------
 window.onload = function () {
+  startGame = new Game;
   // Health & Scoreboard
   let playerHP = document.getElementById("playerHP")
 
@@ -98,18 +116,12 @@ window.onload = function () {
 let player = $("#player")
 $(".clickable").click(function() {
   // this.style.backgroundColor = 'red';
-  // let imgSource = $(this).children().prop('src');
-
-  let startGame = new Game;
   let imgId = $(this).children().prop('id');
-  console.log(startGame);
-
   startGame.createPlayer(imgId)
-
   $('#player').empty();
   $('#player').append($(this).children());
-
   $(".clickable").empty(); // Remove all other sprites
+
   setInterval(startGame.createPokemon, 2000)
 });
 
