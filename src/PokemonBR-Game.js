@@ -82,18 +82,6 @@ window.onload = function () {
   $(`.r${a}c${b}`).append(player);
 };
 
-var down = false;
-document.addEventListener('keydown', function () {
-    if(down) return;
-    down = true;
-
-    // your magic code here
-}, false);
-
-document.addEventListener('keyup', function () {
-    down = false;
-}, false);
-
 // ---------------------------------------------------------
 
 // Starter Pokemon Choice

@@ -24,10 +24,13 @@ progress {
     margin-left: 38px;
     margin-right: 15px;
 }
-/* 
-.grid-box {
 
-} */
+.grid-box {
+    width: 825px;
+    background-image: url("https://opengameart.org/sites/default/files/environment_forestbackground_2.png");
+    background-size: 825px 800px;
+    background-repeat: none;
+}
 
 .grid-row {
     display: flex;
@@ -40,7 +43,7 @@ progress {
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 0.5px solid gray;
+    /* border: 0.5px solid gray; */
     width: 60px;
     height: 60px;
     margin: 3px;
