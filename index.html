@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon Battle Royale</title>
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.js" integrity="sha256-BTlTdQO9/fascB1drekrDVkaKd9PkwBymMlHOiG+qLI=" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="stylesheets/styles.css">
+  </head>
+  <body>
+    <div class="container-fluid"> 
+        <div class="row">
+            <progress id="playerHP" value="100" max="100"></progress>
+            <h6 id="score">Score: 0</h6>
+          </div>
+          <!-- <div class="row playerEvolution">
+            
+          </div> -->
+          <!-- <img class="row typechart">
+            <img src=""></img>
+          </div> -->
+          <div class="row choose"> 
+              <div class="clickable"><img id="0" src="img/buneary1.gif"/><p>Normal</p></div>
+              <div class="clickable"><img id="1" src="img/tornadus1.gif"/><p>Flying</p></div>
+              <div class="clickable"><img id="2" src="img/machop1.gif"/><p>Fighting</p></div>
+              <div class="clickable"><img id="3" src="img/cleffa1.gif"/><p>Fairy</p></div>
+              <div class="clickable"><img id="4" src="img/abra1.gif"/><p>Psychic</p></div>
+              <div class="clickable"><img id="5" src="img/duskull1.gif"/><p>Ghost</p></div>
+              <div class="clickable"><img id="6" src="img/zorua1.gif"/><p>Dark</p></div>
+              <div class="clickable"><img id="7" src="img/ekans1.gif"/><p>Poison</p></div>
+              <div class="clickable"><img id="8" src="img/rockruff1.gif"/><p>Rock</p></div>
+            </div>
+            <div class="row choose"> 
+              <div class="clickable"><img id="9" src="img/diglett1.gif"/><p>Ground</p></div>
+              <div class="clickable"><img id="10" src="img/klink1.gif"/><p>Steel</p></div>
+              <div class="clickable"><img id="11" src="img/pichu1.gif"/><p>Electric</p></div>
+              <div class="clickable"><img id="12" src="img/kricketot1.gif"/><p>Bug</p></div>
+              <div class="clickable"><img id="13" src="img/treecko1.gif"/><p>Grass</p></div>
+              <div class="clickable"><img id="14" src="img/cyndaquil1.gif"/><p>Fire</p></div>
+              <div class="clickable"><img id="15" src="img/squirtle1.gif"/><p>Water</p></div>
+              <div class="clickable"><img id="16" src="img/snorunt1.gif"/><p>Ice</p></div>
+              <div class="clickable"><img id="17" src="img/axew1.gif"/><p>Dragon</p></div>
+          </div>
+
+          <div class="col-6 grid-box">
+            <div class="grid-row row1">
+              <span class="r11c corner-edge r11c11"> <div id="player"><img src="img/pikachu-hat.gif"/><p>Player</p></div> </span>
+              <span class="r11c top-edge r11c12"></span>
+              <span class="r11c top-edge r11c13"></span>
+              <span class="r11c top-edge r11c14"></span>
+              <span class="r11c top-edge r11c15"></span>
+              <span class="r11c top-edge r11c16"></span>
+              <span class="r11c top-edge r11c17"></span>
+              <span class="r11c top-edge r11c18"></span>
+              <span class="r11c top-edge r11c19"></span>
+              <span class="r11c top-edge r11c20"></span>
+              <span class="r11c top-edge r11c21"></span>
+              <span class="r11c corner-edge r11c22"></span>
+            </div>
+            <div class="grid-row row2">
+              <span class="r12c left-edge r12c11"></span>
+              <span class="r12c r12c12"></span>
+              <span class="r12c r12c13"></span>
+              <span class="r12c r12c14"></span>
+              <span class="r12c r12c15"></span>
+              <span class="r12c r12c16"></span>
+              <span class="r12c r12c17"></span>
+              <span class="r12c r12c18"></span>
+              <span class="r12c r12c19"></span>
+              <span class="r12c r12c20"></span>
+              <span class="r12c r12c21"></span>
+              <span class="r12c right-edge r12c22"></span>
+            </div>
+            <div class="grid-row row3">
+              <span class="r13c left-edge r13c11"></span>
+              <span class="r13c r13c12"></span>
+              <span class="r13c r13c13"></span>
+              <span class="r13c r13c14"></span>
+              <span class="r13c r13c15"></span>
+              <span class="r13c r13c16"></span>
+              <span class="r13c r13c17"></span>
+              <span class="r13c r13c18"></span>
+              <span class="r13c r13c19"></span>
+              <span class="r13c r13c20"></span>
+              <span class="r13c r13c21"></span>
+              <span class="r13c right-edge r3c22"></span>
+            </div>
+            <div class="grid-row row4">
+              <span class="r14c left-edge r14c11"></span>
+              <span class="r14c r14c12"></span>
+              <span class="r14c r14c13"></span>
+              <span class="r14c r14c14"></span>
+              <span class="r14c r14c15"></span>
+              <span class="r14c r14c16"></span>
+              <span class="r14c r14c17"></span>
+              <span class="r14c r14c18"></span>
+              <span class="r14c r14c19"></span>
+              <span class="r14c r14c20"></span>
+              <span class="r14c r14c21"></span>
+              <span class="r14c right-edge r14c22"></span>
+            </div>
+            <div class="grid-row row5">
+              <span class="r15c left-edge r15c11"></span>
+              <span class="r15c r15c12"></span>
+              <span class="r15c r15c13"></span>
+              <span class="r15c r15c14"></span>
+              <span class="r15c r15c15"></span>
+              <span class="r15c r15c16"></span>
+              <span class="r15c r15c17"></span>
+              <span class="r15c r15c18"></span>
+              <span class="r15c r15c19"></span>
+              <span class="r15c r15c20"></span>
+              <span class="r15c r15c21"></span>
+              <span class="r15c right-edge r15c22"></span>
+            </div>
+            <div class="grid-row row6">
+              <span class="r16c left-edge r16c11"></span>
+              <span class="r16c r16c12"></span>
+              <span class="r16c r16c13"></span>
+              <span class="r16c r16c14"></span>
+              <span class="r16c r16c15"></span>
+              <span class="r16c r16c16"></span>
+              <span class="r16c r16c17"></span>
+              <span class="r16c r16c18"></span>
+              <span class="r16c r16c19"></span>
+              <span class="r16c r16c20"></span>
+              <span class="r16c r16c21"></span>
+              <span class="r16c right-edge r16c22"></span>
+            </div>
+            <div class="grid-row row7">
+              <span class="r17c left-edge r17c11"></span>
+              <span class="r17c r17c12"></span>
+              <span class="r17c r17c13"></span>
+              <span class="r17c r17c14"></span>
+              <span class="r17c r17c15"></span>
+              <span class="r17c r17c16"></span>
+              <span class="r17c r17c17"></span>
+              <span class="r17c r17c18"></span>
+              <span class="r17c r17c19"></span>
+              <span class="r17c r17c20"></span>
+              <span class="r17c r17c21"></span>
+              <span class="r17c right-edge r17c22"></span>
+            </div>
+            <div class="grid-row row8">
+              <span class="r18c left-edge r18c11"></span>
+              <span class="r18c r18c12"></span>
+              <span class="r18c r18c13"></span>
+              <span class="r18c r18c14"></span>
+              <span class="r18c r18c15"></span>
+              <span class="r18c r18c16"></span>
+              <span class="r18c r18c17"></span>
+              <span class="r18c r18c18"></span>
+              <span class="r18c r18c19"></span>
+              <span class="r18c r18c20"></span>
+              <span class="r18c r18c21"></span>
+              <span class="r18c right-edge r18c22"></span>
+            </div>
+            <div class="grid-row row9">
+              <span class="r19c left-edge r19c11"></span>
+              <span class="r19c r19c12"></span>
+              <span class="r19c r19c13"></span>
+              <span class="r19c r19c14"></span>
+              <span class="r19c r19c15"></span>
+              <span class="r19c r19c16"></span>
+              <span class="r19c r19c17"></span>
+              <span class="r19c r19c18"></span>
+              <span class="r19c r19c19"></span>
+              <span class="r19c r19c20"></span>
+              <span class="r19c r19c21"></span>
+              <span class="r19c right-edge r19c22"></span>
+            </div>
+            <div class="grid-row row10">
+              <span class="r20c left-edge r20c11"></span>
+              <span class="r20c r20c12"></span>
+              <span class="r20c r20c13"></span>
+              <span class="r20c r20c14"></span>
+              <span class="r20c r20c15"></span>
+              <span class="r20c r20c16"></span>
+              <span class="r20c r20c17"></span>
+              <span class="r20c r20c18"></span>
+              <span class="r20c r20c19"></span>
+              <span class="r20c r20c20"></span>
+              <span class="r20c r20c21"></span>
+              <span class="r20c right-edge r20c22"></span>
+            </div>
+            <div class="grid-row row11">
+              <span class="r21c left-edge r21c11"></span>
+              <span class="r21c r21c12"></span>
+              <span class="r21c r21c13"></span>
+              <span class="r21c r21c14"></span>
+              <span class="r21c r21c15"></span>
+              <span class="r21c r21c16"></span>
+              <span class="r21c r21c17"></span>
+              <span class="r21c r21c18"></span>
+              <span class="r21c r21c19"></span>
+              <span class="r21c r21c20"></span>
+              <span class="r21c r21c21"></span>
+              <span class="r21c right-edge r21c22"></span>
+            </div>
+            <div class="grid-row row12">
+              <span class="r22c corner-edge r22c11"></span>
+              <span class="r22c bottom-edge r22c12"></span>
+              <span class="r22c bottom-edge r22c13"></span>
+              <span class="r22c bottom-edge r22c14"></span>
+              <span class="r22c bottom-edge r22c15"></span>
+              <span class="r22c bottom-edge r22c16"></span>
+              <span class="r22c bottom-edge r22c17"></span>
+              <span class="r22c bottom-edge r22c18"></span>
+              <span class="r22c bottom-edge r22c19"></span>
+              <span class="r22c bottom-edge r22c20"></span>
+              <span class="r22c bottom-edge r22c21"></span>
+              <span class="r22c corner-edge r22c22"></span>
+            </div>
+          </div>
+        </div>
+        </div>
+      </div>
+    </div>
+    
+  <script type="text/javascript" src="./src/PokemonBR-Game.js"></script>
+  <script type="text/javascript" src="./src/PokemonBR-Pokemon.js"></script>
+  </body>
+</html>

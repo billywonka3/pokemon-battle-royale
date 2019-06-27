@@ -9,23 +9,29 @@
 }
 
 progress {
-    width: 22%;
-
+    width: 40%;
+    margin-left: 35px;
 }
 
 #score {
-    width: 22%;
+    width: 40%;
     margin-left: 20px;
+}
+
+.choose {
+    margin-left: 35px;
 }
 
 .clickable {
     font-size: 9px;
     text-align: center;
+    margin-left: 38px;
+    margin-right: 15px;
 }
-
+/* 
 .grid-box {
 
-}
+} */
 
 .grid-row {
     display: flex;
