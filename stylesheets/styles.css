@@ -9,17 +9,13 @@
 }
 
 progress {
-    width: 40%;
+    width: 38%;
     margin-left: 35px;
 }
 
 #score {
     width: 40%;
     margin-left: 20px;
-}
-
-.choose {
-    margin-left: 35px;
 }
 
 .clickable {
