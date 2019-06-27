@@ -101,9 +101,9 @@ class Game {
     startGame = new Game;
     // Health & Scoreboard
     let playerHP = document.getElementById("playerHP");
-      if (playerHP < 1) {
-        return gameover;
-      }
+      // if (playerHP.value < 1) {
+      //   return alert('Game Over, you were eaten by wild pokemon');
+      // }
     // Instructions Starter Screen
 
     // Starter Pokemon Choice
@@ -133,6 +133,7 @@ class Game {
       }
       $(`.r${a}c${b}`).append(player);
 
+      if(e.keyCode == 32){ alert('Game Over, you were eaten by wild pokemon'); }
       // Collision Conditionals 
       // let damageMultiplier = {
       //   Normal : [Fight],
